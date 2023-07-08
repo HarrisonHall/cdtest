@@ -101,7 +101,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Parse other projects
     let all_projects = parse_all_projects();
     for other_project in all_projects {
-        other_project.garbage_collect();
+        // Only gc other projects
+        if other_project.name != new_project.name {
+            other_project.garbage_collect();
+        }
     }
 
     // Create subshell in project directory
